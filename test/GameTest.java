@@ -9,11 +9,14 @@ import static org.junit.Assert.*;
 
 public class GameTest {
 
+    //static variables
+    private static final int INCORRECT_INPUT = -2;
+    private static final int PASSWORD_MATCH = -1;
     private static final List<String > WORDS = Arrays.asList("a&f-!", "*d#]t", "$-52q", "t&d].", "&d]-2");
 
     @Test
     public void testDefaultConstructorOne() {
-        //this one tests the lives
+        //this one tests the
         Game game = new Game();
         List<String> actualWords = game.getWords();
         assertEquals(5, game.getLivesLeft());
@@ -60,11 +63,6 @@ public class GameTest {
         assertArrayEquals(WORDS.toArray(), actualWords.toArray());
     }
 
-
-    @Test
-    public void testPlay() {
-    }
-
     @Test
     public void testIsAlive() {
         Game g = new Game(5);
@@ -106,4 +104,48 @@ public class GameTest {
         assertEquals(0, livesLeft);
         assertNotNull(actualPass);
     }
+
+    //ADDITONAL TESTS
+    @Test
+    public void testRevealPasswordMakesGameEnd() {
+        int lives = 7;
+        Game game = new Game(lives);
+        game.revealPassword();
+        assertFalse(game.isAlive());
+        assertEquals(INCORRECT_INPUT, game.play(0));
+    }
+
+    @Test
+    public void testGameWhenGuessedRight(){
+        int initialLives = 7;
+        Game game = new Game(initialLives);
+        assertEquals(initialLives, game.getLivesLeft());
+
+        List<String> words = game.getWords();
+        String actualPassword = game.getActualPasswordForTest();
+        int correctGuessIndex = words.indexOf(actualPassword);
+
+        assertEquals(PASSWORD_MATCH, game.play(correctGuessIndex));
+        assertEquals(initialLives, game.getLivesLeft());
+        assertTrue(game.isAlive());
+    }
+
+    @Test
+    public void testGameAfterSingleWrongGuess(){
+
+    }
+
+    @Test
+    public void testGameUntilAllLivesLost(){
+
+    }
+
+    @Test
+    public void testGameWhenAllLivesLost(){
+
+    }
+
+
+
+
 }

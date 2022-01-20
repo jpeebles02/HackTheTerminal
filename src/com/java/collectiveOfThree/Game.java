@@ -22,7 +22,6 @@ public class Game {
 
 
     //constructors
-
     public Game() {
         this(LEVEL.LEVEL_1, 5);
     }
@@ -158,6 +157,11 @@ public class Game {
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
+    }
+
+    //strictly for testing
+    public String getActualPasswordForTest(){
+        return this.actualPassword;
     }
 
 }
