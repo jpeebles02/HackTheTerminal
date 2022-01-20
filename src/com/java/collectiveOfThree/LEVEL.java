@@ -1,4 +1,4 @@
-package com.java.hacking;
+package com.java.collectiveOfThree;
 
 public enum LEVEL {
     //user will input a number. we use the input as a key to the filename
